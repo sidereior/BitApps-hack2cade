@@ -2,8 +2,8 @@ pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract CoinTreeNFT is ERC721 {
-    constructor() ERC721("CoinTreeNFT", "CTNFT") {}
+contract BitApps is ERC721 {
+    constructor() ERC721("BitAppsNFT", "BNFT") {}
 
     mapping(uint256 => string) public tokenIdToDescription;
     mapping(uint256 => string) public tokenIdToImage;
