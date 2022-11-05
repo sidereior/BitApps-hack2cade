@@ -33,6 +33,10 @@ app.get('/balance', (req, res) => {
   }
   return balances;
 });
+
+app.get('/games', (req, res) => {
+  return res.();
+});
  
  app.post('/', (req, res) => {
    return res.send('no POST HTTP method call');

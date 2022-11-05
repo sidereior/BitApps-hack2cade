@@ -7,6 +7,7 @@ contract Safe {
 
     address[] publishers;
     address[] players;
+    
 
     mapping(address => uint256) public balances;//need to set size?
     uint counter = 0;
@@ -33,6 +34,10 @@ contract Safe {
         //cases where the distribute function should be used:
         //1. when a player purchases an app, the publisher ping restapi to call this and should be paid the 
         //amount equal to the price of the app + 1 Matic from the holding fee
+    }
+
+    function createGame(string memory gameName) public{
+        
     }
 
     function getBalance(address name) public view returns (uint) {
