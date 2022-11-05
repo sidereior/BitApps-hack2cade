@@ -20,7 +20,7 @@ contract Safe {
         players.push(msg.sender);
     }
 
-    function deposit(address memory name) public payable { //the parameter here is the publisher name to be paid
+    function deposit(address memory name) public payable { //the parameter here the name of the person whose balance is gonna increae from this
         balances[name] += msg.value;
         //cases where the deposit function should be used:
         //1. when a publisher uploads an app
@@ -31,7 +31,8 @@ contract Safe {
         balances[name] -= amount;
         payable(name).transfer(amount);
         //cases where the distribute function should be used:
-        //1. when a player purchases an app, the publisher ping restapi to call this and should be paid the amount equal to the price of the app
+        //1. when a player purchases an app, the publisher ping restapi to call this and should be paid the 
+        //amount equal to the price of the app + 1 Matic from the holding fee
     }
 
     function getBalance(address memory name) public view returns (uint) {
