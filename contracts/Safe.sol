@@ -20,14 +20,14 @@ contract Safe {
         players.push(msg.sender);
     }
 
-    function deposit(address memory name) public payable { //the parameter here the name of the person whose balance is gonna increae from this
+    function deposit(address name) public payable { //the parameter here the name of the person whose balance is gonna increae from this
         balances[name] += msg.value;
         //cases where the deposit function should be used:
         //1. when a publisher uploads an app
         //2. when a player purchars an app
     }
 
-    function distribute(uint256 amount, address memory name) public {//the parameter is the name of the account to be paid
+    function distribute(uint256 amount, address name) public {//the parameter is the name of the account to be paid
         balances[name] -= amount;
         payable(name).transfer(amount);
         //cases where the distribute function should be used:
@@ -35,7 +35,7 @@ contract Safe {
         //amount equal to the price of the app + 1 Matic from the holding fee
     }
 
-    function getBalance(address memory name) public view returns (uint) {
+    function getBalance(address name) public view returns (uint) {
         return balances[name];
     }
 

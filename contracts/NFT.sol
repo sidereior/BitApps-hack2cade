@@ -33,7 +33,7 @@ contract BitApps is ERC721 {
         return tokenIdToImage[tokenId];
     }
 
-    function getTokenCounter() public view returns {
+    function getTokenCounter() public view returns (uint256 ben){
         return tokenCounter-1;
     }
 

@@ -21,15 +21,15 @@ app.get('/balance', (req, res) => {
    return res.send(`balance: ${balanceInEth} ETH`);
  });
 
- app.get('/companies', (req, res) => {
-  return res.getCompanies();
+ app.get('/publishers', (req, res) => {
+  return res.getPublishers();
 });
 
  app.get('/balances', (req, res) => {
-  const companiesList = res.getCompanies();
+  const publishersList = res.getPublishers();
   const balances = [];
-  for (let i = 0; i < companiesList.length; i++) {
-    balances.push(res.getBalance(companiesList[i]));
+  for (let i = 0; i < publishersList.length; i++) {
+    balances.push(res.getBalance(publishersList[i]));
   }
   return balances;
 });
