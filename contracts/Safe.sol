@@ -5,42 +5,40 @@ contract Safe {
 
     constructor() {}
 
-    string[] publishers;
-    string[] players;
+    address[] publishers;
+    address[] players;
 
-    mapping(string => uint256) public balances;
+    mapping(address => uint256) public balances;//need to set size?
     uint counter = 0;
 
-    function createPublisher(string memory name) public {
-        publishers.push(name);
-        balances[name] = 1; // this is 1 MATIC from the holding fee
+    function createPublisher() public {
+        publishers.push(msg.sender);
+        balances[msg.sender] = 0;
     }
 
-    function createPlayer(string memory name) public {
-        players.push(name);
+    function createPlayer() public {
+        players.push(msg.sender);
     }
 
-    function deposit(string memory name) public payable { //the parameter here is the publisher name to be paid
+    function deposit(address memory name) public payable { //the parameter here is the publisher name to be paid
         balances[name] += msg.value;
+        //cases where the deposit function should be used:
+        //1. when a publisher uploads an app
+        //2. when a player purchars an app
     }
 
-    function distribute(uint256 amount, string memory name) public {//the parameter is the name of the account to be paid
-        for(int i = 0; i < publishers.length; i++) {
-            while(balances[publishers[i]] > 1) {
-                payable(name).transfer(amount)-tx.gasprice;
-                balances[name] -= amount;
-            }
-            payable(players[i]).transfer(amount);
-        }
-        
-        payable(msg.sender).transfer(amount);
+    function distribute(uint256 amount, address memory name) public {//the parameter is the name of the account to be paid
+        balances[name] -= amount;
+        payable(name).transfer(amount);
+        //cases where the distribute function should be used:
+        //1. when a player purchases an app, the publisher ping restapi to call this and should be paid the amount equal to the price of the app
     }
 
-    function getBalance(string memory name) public view returns (uint) {
+    function getBalance(address memory name) public view returns (uint) {
         return balances[name];
     }
 
-    function getPublishers() public view returns (string[] memory) {
+    function getPublishers() public view returns (address[] memory) {
         return publishers;
     }
 }
