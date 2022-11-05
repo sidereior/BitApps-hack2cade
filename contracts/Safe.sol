@@ -19,21 +19,20 @@ contract Safe {
     function deposit(address name) public payable { //the parameter here the name of the person whose balance is gonna increae from this
         balances[name] += msg.value;
         //cases where the deposit function should be used:
-        //1. when a publisher uploads an app
-        //2. when a player purchars an app
+        //1. when a player purchars an app (just do msg.sender) SHOULD BE DONE FIRST
     }
 
     function distribute(uint256 amount, address name) public {//the parameter is the name of the account to be paid
         balances[name] -= amount;
         payable(name).transfer(amount);
         //cases where the distribute function should be used:
-        //1. when a player purchases an app, the publisher ping restapi to call this and should be paid the 
-        //amount equal to the price of the app + 1 Matic from the holding fee
+        //1. when a player purchases an app, the publisher should be paid
+        //amount equal to the price of the app SHOULD BE DONE SECOND
     }
 
     function createGame(string memory gameName) public{
         games[msg.sender].push(gameName);
-        //you should use createGame and then distribute for 1 eth after this
+        //you should use createGame when someone goes to upload a game (independent of people trying to buy)
     }
 
     function getBalance(address name) public view returns (uint) {
