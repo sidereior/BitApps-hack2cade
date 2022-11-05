@@ -35,7 +35,7 @@ app.get('/balance', (req, res) => {
 });
 
 app.get('/games', (req, res) => {
-  return res.();
+  return res;
 });
  
  app.post('/', (req, res) => {

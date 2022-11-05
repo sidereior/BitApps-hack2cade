@@ -6,19 +6,14 @@ contract Safe {
     constructor() {}
 
     address[] publishers;
-    address[] players;
     
-
-    mapping(address => uint256) public balances;//need to set size?
+    mapping(address => string[]) public games;
+    mapping(address => uint256) public balances;
     uint counter = 0;
 
     function createPublisher() public {
         publishers.push(msg.sender);
         balances[msg.sender] = 0;
-    }
-
-    function createPlayer() public {
-        players.push(msg.sender);
     }
 
     function deposit(address name) public payable { //the parameter here the name of the person whose balance is gonna increae from this
@@ -37,7 +32,8 @@ contract Safe {
     }
 
     function createGame(string memory gameName) public{
-        
+        games[msg.sender].push(gameName);
+        //you should use createGame and then distribute for 1 eth after this
     }
 
     function getBalance(address name) public view returns (uint) {
@@ -46,5 +42,10 @@ contract Safe {
 
     function getPublishers() public view returns (address[] memory) {
         return publishers;
+    }
+
+    function getGames(address publisherName) public view returns (string[] memory)
+    {
+        return games[publisherName];
     }
 }
